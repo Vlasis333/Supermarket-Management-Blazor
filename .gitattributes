@@ -1,5 +1,4 @@
-*.sol linguist-language=Solidity
-*.csharp linguist-detectable=true  
+*.csharp linguist-detectable=Solidity  
 *.java linguist-detectable=false  
 *.html linguist-detectable=false
 *.css linguist-detectable=false  
