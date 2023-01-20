@@ -1,0 +1,45 @@
+﻿@page "/categories"
+
+@inject NavigationManager NavigationManager
+@inject UseCases.UseCaseInterfaces.IViewCategoriesUseCase ViewCategoriesUseCase
+
+<h3>Manage Categories</h3>
+
+@if (categories != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in categories)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<br />
+<button type="button" @onclick="OnClickAddCategory" class="btn btn-primary">Add Category</button>
+
+@code {
+    private List<Category> categories;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        categories = ViewCategoriesUseCase.Exacute().ToList();
+    }
+
+    private void OnClickAddCategory()
+    {
+        NavigationManager.NavigateTo("/addcategory");
+    }
+
+}

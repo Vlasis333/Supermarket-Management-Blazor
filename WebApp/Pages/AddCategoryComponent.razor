@@ -1,0 +1,51 @@
+﻿@page "/addcategory"
+
+@inject NavigationManager NavigationManager
+@inject IAddCategoryUseCase AddCategoryUseCase
+
+<h3>Add Category</h3>
+
+@if (category != null)
+{
+    <EditForm Model="category" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <InputText id="name" @bind-Value="category.Name" class="form-control"></InputText>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Description</label>
+            <InputText id="name" @bind-Value="category.Description" class="form-control"></InputText>
+        </div>
+
+        <br>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary" @onclick="OnCancel">Cancel</button>
+    </EditForm>
+}
+
+@code {
+    private Category category;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        category = new Category();
+    }
+
+    private void OnValidSubmit()
+    {
+        AddCategoryUseCase.Execute(category);
+        NavigationManager.NavigateTo("/categories");
+    }
+
+    private void OnCancel()
+    {
+        NavigationManager.NavigateTo("/categories");
+    }
+}
