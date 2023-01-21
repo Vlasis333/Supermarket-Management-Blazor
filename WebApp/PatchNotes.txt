@@ -1,0 +1,16 @@
+﻿- Admins:
+Manage Categories
+Manage Products
+Manage Sellers
+
+- Sellers:
+Selling console
+
+We are creating a InMemory data store first for rapid development, then swap it with SQL database later.
+
+Added Create Category
+Added Read Category
+Added Update Category
+Added Delete Category
+
+Added Read Products

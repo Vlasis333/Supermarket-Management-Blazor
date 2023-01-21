@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Plugins.DataStore.InMemory;
 using UseCases;
+using UseCases.CategoriesUseCase;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 using WebApp.Data;
