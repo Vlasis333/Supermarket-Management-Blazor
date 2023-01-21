@@ -1,9 +1,11 @@
-﻿@page "/addcategory"
+﻿@page "/editcategory/{Id}"
 
 @inject NavigationManager NavigationManager
 @inject IAddCategoryUseCase AddCategoryUseCase
+@inject IGetCategoryByIdUseCase GetCategoryByIdUseCase
+@inject IEditCategoryUseCase EditCategoryUseCase
 
-<h3>Add Category</h3>
+<h3>Edit Category</h3>
 <br />
 
 @if (category != null)
@@ -30,6 +32,9 @@
 }
 
 @code {
+    [Parameter]
+    public string Id { get; set; }
+
     private Category category;
 
     protected override void OnInitialized()
@@ -41,8 +46,25 @@
 
     private void OnValidSubmit()
     {
-        AddCategoryUseCase.Execute(category);
+        EditCategoryUseCase.Execute(this.category);
         NavigationManager.NavigateTo("/categories");
+    }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (int.TryParse(this.Id, out int intId))
+        {
+            //this.category = GetCategoryByIdUseCase.Execute(intId);
+            var mainCategory = GetCategoryByIdUseCase.Execute(intId);
+            this.category = new Category 
+            { 
+                Id = mainCategory.Id, 
+                Name = mainCategory.Name, 
+                Description = mainCategory.Description 
+            };
+        }
     }
 
     private void OnCancel()
