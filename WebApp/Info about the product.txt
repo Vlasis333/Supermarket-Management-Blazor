@@ -8,3 +8,4 @@ Selling console
 
 We are creating a InMemory data store first for rapid development, then swap it with SQL database later.
 Added Edit Category
+Added Delete Category
