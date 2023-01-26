@@ -23,9 +23,9 @@
             @foreach (var product in products)
             {
                 <tr>
-                    <td>@GetCategoryByIdUseCase.Execute(product.CategoryId)?.Name</td>
+                    <td>@GetCategoryByIdUseCase.Execute(product.CategoryId.Value)?.Name</td>
                     <td>@product.Name</td>
-                    <td>@(Math.Round(product.Price, 2))</td>
+                    <td>@(Math.Round(product.Price.Value, 2))</td>
                     <td>@product.Quantity</td>
                 </tr>
             }
@@ -33,15 +33,20 @@
     </table>
 }
 <br />
+<button type="button" @onclick="OnClickAddProduct" class="btn btn-primary">Add Product</button>
 
-@code {
-    private IEnumerable<Product> products;
+    @code {
+        private IEnumerable<Product> products;
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
 
-        products = ViewProductsuseCase.Execute();
-    }
+            products = ViewProductsuseCase.Execute();
+        }
 
+        private void OnClickAddProduct()
+        {
+            NavigationManager.NavigateTo("/addproduct");
+        }
 }

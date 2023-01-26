@@ -36,7 +36,6 @@ namespace Plugins.DataStore.InMemory
                 category.Id = 1;
             }
 
-
             categories.Add(category);
         }
 
