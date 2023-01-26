@@ -11,5 +11,7 @@ namespace UseCases.DataStorePluginInterfaces
     {
         public IEnumerable<Product> GetProducts();
         void AddProduct(Product product);
+        void UpdateProduct(Product product);
+        Product GetProductById(int productId);
     }
 }

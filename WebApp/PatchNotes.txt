@@ -8,10 +8,11 @@ Selling console
 
 We are creating a InMemory data store first for rapid development, then swap it with SQL database later.
 
-Added Read Category
+Added Read Categories
 Added Create Category
 Added Update Category
 Added Delete Category
 
 Added Read Products
-Added Create Products
+Added Create Product
+Added Update Product

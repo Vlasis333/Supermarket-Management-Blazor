@@ -27,6 +27,9 @@
                     <td>@product.Name</td>
                     <td>@(Math.Round(product.Price.Value, 2))</td>
                     <td>@product.Quantity</td>
+                    <td>
+                        <button type="button" @onclick="@(() => EditProduct(product))" class="btn btn-link">Edit</button>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -35,18 +38,23 @@
 <br />
 <button type="button" @onclick="OnClickAddProduct" class="btn btn-primary">Add Product</button>
 
-    @code {
-        private IEnumerable<Product> products;
+@code {
+    private IEnumerable<Product> products;
 
-        protected override void OnInitialized()
-        {
-            base.OnInitialized();
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
 
-            products = ViewProductsuseCase.Execute();
-        }
+        products = ViewProductsuseCase.Execute();
+    }
 
-        private void OnClickAddProduct()
-        {
-            NavigationManager.NavigateTo("/addproduct");
-        }
+    private void OnClickAddProduct()
+    {
+        NavigationManager.NavigateTo("/addproduct");
+    }
+
+    private void EditProduct(Product product)
+    {
+        NavigationManager.NavigateTo($"/editproduct/{product.Id}");
+    }
 }
