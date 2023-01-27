@@ -2,6 +2,6 @@
 {
     public interface IDeleteCategoryUseCase
     {
-        void Delete(int categoryId);
+        void Execute(int categoryId);
     }
 }

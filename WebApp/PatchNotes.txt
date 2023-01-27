@@ -16,3 +16,4 @@ Added Delete Category
 Added Read Products
 Added Create Product
 Added Update Product
+Added Delete Product

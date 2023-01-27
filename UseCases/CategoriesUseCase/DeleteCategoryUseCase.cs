@@ -16,7 +16,8 @@ namespace UseCases.CategoriesUseCase
         {
             this.categoryRepository = categoryRepository;
         }
-        public void Delete(int categoryId)
+
+        public void Execute(int categoryId)
         {
             categoryRepository.DeleteCategory(categoryId);
         }

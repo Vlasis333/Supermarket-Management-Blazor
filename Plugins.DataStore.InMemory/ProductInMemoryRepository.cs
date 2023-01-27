@@ -63,5 +63,10 @@ namespace Plugins.DataStore.InMemory
         {
             return products?.FirstOrDefault(p => p.Id == productId);
         }
+
+        public void DeleteProduct(int productId)
+        {
+            products?.Remove(GetProductById(productId));
+        }
     }
 }
