@@ -5,7 +5,9 @@
 
 <div class="row">
     <div class="col">
-        <SelectProductForSellingComponent></SelectProductForSellingComponent>
+        <SelectProductForSellingComponent OnProductSelected="SelectProduct"></SelectProductForSellingComponent>
+        <br />
+        <SellingProductComponent SelectedProduct="selectedProduct" OnProductSold="SellProduct"></SellingProductComponent>
     </div>
     <div class="col">
         Place Holder
@@ -13,5 +15,15 @@
 </div>
 
 @code {
+    private Product selectedProduct;
 
+    private void SelectProduct(Product product)
+    {
+        selectedProduct = product;
+    }
+
+    private void SellProduct(Product product)
+    {
+        
+    }
 }

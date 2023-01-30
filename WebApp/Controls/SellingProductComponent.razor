@@ -1,0 +1,81 @@
+﻿@inject IGetProductByIdUseCase GetProductByIdUseCase
+@inject ISellProductUseCase SellProductUseCase
+
+@if (productToSell != null)
+{
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+
+    <EditForm Model="SelectedProduct" OnValidSubmit="SellProduct">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+
+        <div class="form-group">
+            <label for="name">Product Name</label>
+            <input id="name" type="text" readonly value="@productToSell.Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input id="price" type="text" readonly value="@(string.Format("{0:c}", productToSell.Price))" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="qty">Quantity</label>
+            <InputNumber id="qty" @bind-Value="@productToSell.Quantity" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Sell</button>
+    </EditForm>
+}
+
+@code {
+    private Product productToSell;
+    private string errorMessage;
+
+    [Parameter]
+    public Product SelectedProduct { get; set; }
+
+    [Parameter]
+    public EventCallback<Product> OnProductSold { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+
+        if (SelectedProduct != null)
+        {
+            productToSell = new Product
+                {
+                    Id = SelectedProduct.Id,
+                    Name = SelectedProduct.Name,
+                    CategoryId = SelectedProduct.CategoryId,
+                    Price = SelectedProduct.Price,
+                    Quantity = 0
+                };
+        }
+        else
+        {
+            productToSell = null;
+        }
+    }
+
+    private void SellProduct()
+    {
+        var product = GetProductByIdUseCase.Execute(productToSell.Id);
+
+        if (productToSell.Quantity <= 0)
+        {
+            errorMessage = "The quantity has to be greater than zero";
+        }
+        else if (product.Quantity >= productToSell.Quantity)
+        {
+            OnProductSold.InvokeAsync(productToSell);
+            errorMessage = string.Empty;
+            SellProductUseCase.Execute(productToSell.Id, productToSell.Quantity.Value);
+        }
+        else
+        {
+            errorMessage = $"{product.Name} only has {product.Quantity} left. It is not enought.";
+        }
+    }
+}
