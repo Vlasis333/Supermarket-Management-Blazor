@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Plugins.DataStore.InMemory;
+using UseCases;
 using UseCases.CategoriesUseCase;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.ProductsUseCase;
@@ -36,6 +37,8 @@ namespace WebApp
             builder.Services.AddTransient<IEditProductUseCase, EditProductUseCase>();
             builder.Services.AddTransient<IGetProductByIdUseCase, GetProductByIdUseCase>();
             builder.Services.AddTransient<IDeleteProductUseCase, DeleteProductUseCase>();
+            
+            builder.Services.AddTransient<IViewProductsByCategoryId, ViewProductsByCategoryId>();
 
             var app = builder.Build();
 
