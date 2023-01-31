@@ -19,3 +19,4 @@ Added Update Product
 Added Delete Product
 
 Added Cashier's Console: Enter quantity for selling of product, sell, list of sold items.
+Added Sold Items (Transactions)
