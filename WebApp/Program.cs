@@ -19,7 +19,6 @@ namespace WebApp
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
-            builder.Services.AddSingleton<WeatherForecastService>();
 
             // DI for In-Memory Data Store
             builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
