@@ -23,11 +23,6 @@ namespace WebApp
             builder.Services.AddServerSideBlazor();
 
             //Add EF Core
-            var connectionString =
-                builder.Configuration.GetConnectionString("DefaultConnection")
-                ?? throw new InvalidOperationException(
-                    "Connection string 'DefaultConnection' not found."
-            );
             builder.Services.AddDbContext<MarketContext>(options =>
             {
                 options.UseSqlServer(connectionString);
