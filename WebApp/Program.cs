@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.EntityFrameworkCore;
 using Plugins.DataStore.InMemory;
+using Plugins.DataStore.SQL;
 using UseCases;
 using UseCases.CategoriesUseCase;
 using UseCases.DataStorePluginInterfaces;
@@ -20,6 +22,17 @@ namespace WebApp
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
 
+            //Add EF Core
+            var connectionString =
+                builder.Configuration.GetConnectionString("DefaultConnection")
+                ?? throw new InvalidOperationException(
+                    "Connection string 'DefaultConnection' not found."
+            );
+            builder.Services.AddDbContext<MarketContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
+
             // DI for In-Memory Data Store
             builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
             builder.Services.AddScoped<IProductRepository, ProductInMemoryRepository>();
@@ -37,7 +50,7 @@ namespace WebApp
             builder.Services.AddTransient<IEditProductUseCase, EditProductUseCase>();
             builder.Services.AddTransient<IGetProductByIdUseCase, GetProductByIdUseCase>();
             builder.Services.AddTransient<IDeleteProductUseCase, DeleteProductUseCase>();
-            
+
             builder.Services.AddTransient<IViewProductsByCategoryId, ViewProductsByCategoryId>();
             builder.Services.AddTransient<ISellProductUseCase, SellProductUseCase>();
 

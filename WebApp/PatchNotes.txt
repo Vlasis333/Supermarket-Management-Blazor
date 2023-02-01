@@ -6,7 +6,7 @@ Manage Sellers
 - Sellers:
 Selling console
 
-We are creating a InMemory data store first for rapid development, then swap it with SQL database later.
+We are creating a InMemory data store first for rapid development, then swap it with EF Core and SQL database later.
 
 Added Read Categories
 Added Create Category
@@ -22,3 +22,5 @@ Added Cashier's Console: Enter quantity for selling of product, sell, list of so
 Added Sold Items (Transactions)
 Added transactions report page
 Added print button for transactions
+
+Added EF Core to talk to SQL database
