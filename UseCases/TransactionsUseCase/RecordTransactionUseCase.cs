@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 
-namespace UseCases
+namespace UseCases.TransactionsUseCase
 {
     public class RecordTransactionUseCase : IRecordTransactionUseCase
     {
@@ -17,7 +17,7 @@ namespace UseCases
             ITransactionRepository transactionRepository,
             IGetProductByIdUseCase getProductByIdUseCase)
         {
-            this._transactionRepository = transactionRepository;
+            _transactionRepository = transactionRepository;
             this.getProductByIdUseCase = getProductByIdUseCase;
         }
 

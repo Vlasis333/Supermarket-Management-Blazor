@@ -8,7 +8,7 @@ using System.Transactions;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.UseCaseInterfaces;
 
-namespace UseCases
+namespace UseCases.TransactionsUseCase
 {
     public class GetTodayTransactionsUseCase : IGetTodayTransactionsUseCase
     {

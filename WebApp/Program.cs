@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
 using Plugins.DataStore.InMemory;
 using Plugins.DataStore.SQL;
-using UseCases;
 using UseCases.CategoriesUseCase;
 using UseCases.DataStorePluginInterfaces;
 using UseCases.ProductsUseCase;
+using UseCases.TransactionsUseCase;
 using UseCases.UseCaseInterfaces;
 using WebApp.Data;
 
@@ -34,9 +34,14 @@ namespace WebApp
             });
 
             // DI for In-Memory Data Store
-            builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
-            builder.Services.AddScoped<IProductRepository, ProductInMemoryRepository>();
-            builder.Services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();
+            //builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
+            //builder.Services.AddScoped<IProductRepository, ProductInMemoryRepository>();
+            //builder.Services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();
+
+            // DI for ef core Data Store for SQL
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
             // DI for Use Cases and Repositories
             builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();
