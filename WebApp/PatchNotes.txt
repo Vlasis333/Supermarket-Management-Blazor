@@ -21,3 +21,4 @@ Added Delete Product
 Added Cashier's Console: Enter quantity for selling of product, sell, list of sold items.
 Added Sold Items (Transactions)
 Added transactions report page
+Added print button for transactions
