@@ -1,36 +1,51 @@
 ﻿@page "/cashier_console"
+@attribute [Authorize(Policy = "CashierOnly")]
 
-<div class="row">
-    <div class="col-7"><h3>Cashier's Console</h3></div>
-    <div class="col-2"><label for="cashier">Cashier Name:</label></div>
-    <div class="col-3">
-        <div class="form-group">
-            <input type="text" id="cashier" class="form-control" @bind-value="cashierName" />
+@if (!string.IsNullOrWhiteSpace(cashierName))
+{
+    <div class="row">
+        <div class="col-7"><h3>Cashier's Console</h3></div>
+        <div class="col-2"><label for="cashier">Cashier Name:</label></div>
+        <div class="col-3">
+            <div class="form-group">
+                <input type="text" id="cashier" class="form-control" @bind-value="cashierName" />
+            </div>
         </div>
     </div>
-</div>
 
 
-<br />
+    <br />
 
-<div class="row">
-    <div class="col">
-        <SelectProductForSellingComponent OnProductSelected="SelectProduct"></SelectProductForSellingComponent>
-        <br />
-        <SellingProductComponent CashierName="@cashierName"
+    <div class="row">
+        <div class="col">
+            <SelectProductForSellingComponent OnProductSelected="SelectProduct"></SelectProductForSellingComponent>
+            <br />
+            <SellingProductComponent CashierName="@cashierName"
                                  SelectedProduct="selectedProduct"
                                  OnProductSold="SellProduct"></SellingProductComponent>
+        </div>
+        <div class="col">
+            <TodayTransactionsComponent @ref="transactionComponent"></TodayTransactionsComponent>
+        </div>
     </div>
-    <div class="col">
-        <TodayTransactionsComponent @ref="transactionComponent"></TodayTransactionsComponent>
-    </div>
-</div>
+}
 
 @code {
     private TodayTransactionsComponent transactionComponent;
 
     private Product selectedProduct;
     private string cashierName;
+
+    [CascadingParameter]
+    private Task<AuthenticationState> _authState { get; set; }
+
+    private AuthenticationState authSate;
+
+    protected override async Task OnInitializedAsync()
+    {
+        authSate = await _authState;
+        cashierName = authSate.User.Identity.Name;
+    }
 
     protected override void OnInitialized()
     {

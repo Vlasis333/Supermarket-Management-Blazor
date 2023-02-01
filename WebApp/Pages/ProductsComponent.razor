@@ -1,4 +1,5 @@
 ﻿@page "/products"
+@attribute [Authorize(Policy = "AdminOnly")]
 
 @inject NavigationManager NavigationManager
 @inject IViewProductsUseCase ViewProductsuseCase
