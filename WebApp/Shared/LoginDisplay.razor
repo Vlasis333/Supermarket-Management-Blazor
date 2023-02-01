@@ -3,14 +3,14 @@
 
 <AuthorizeView>
     <Authorized>
-        <a href="Identity/Account/Manage">Hello @context.User.Identity.Name</a>
-        <form action="/Identity/Account/Logout?returnUrl=%2F" method="post">
+        <a class="py-2 d-none d-md-inline-block" href="Identity/Account/Manage">Hello @context.User.Identity.Name</a>
+        <form class="py-2 d-none d-md-inline-block" action="/Identity/Account/Logout?returnUrl=%2F" method="post">
             <button type="submit" class="nav-link btn btn-link">Log Out</button>
         </form>
     </Authorized>
     <NotAuthorized>
-        <a href="Identity/Account/Register">Register</a>
-        <a href="Identity/Account/Login">Log in</a>
+        <a class="py-2 d-none d-md-inline-block" href="Identity/Account/Register">Register</a>
+        <a class="py-2 d-none d-md-inline-block" href="Identity/Account/Login">Log in</a>
     </NotAuthorized>
 </AuthorizeView>
 
