@@ -9,6 +9,8 @@ using UseCases.ProductsUseCase;
 using UseCases.TransactionsUseCase;
 using UseCases.UseCaseInterfaces;
 using WebApp.Data;
+using Microsoft.AspNetCore.Identity;
+using System.Configuration;
 
 namespace WebApp
 {
@@ -25,8 +27,16 @@ namespace WebApp
             //Add EF Core
             builder.Services.AddDbContext<MarketContext>(options =>
             {
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            builder.Services.AddDbContext<AccountContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("AccountContextConnection"));
+            });
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<AccountContext>();
 
             // DI for In-Memory Data Store
             //builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
@@ -76,6 +86,7 @@ namespace WebApp
 
             app.MapBlazorHub();
             app.MapFallbackToPage("/_Host");
+            app.UseAuthentication(); ;
 
             app.Run();
         }
