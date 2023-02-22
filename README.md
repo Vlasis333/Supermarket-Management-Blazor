@@ -9,3 +9,12 @@ Capabilities include:
  - Printing reports
  - Connecting to SQL using EF Core
  - Using ASP.NET Core Identity for Authentication and Authorization.
+
+## Instructions
+1. Clone repository
+2. Right click on solution and select 'Restore NuGet Packages'
+3. On Plugins.DataStore.SQL project run this command at Package Manager Console
+    - 'Update-Database'
+    - You can change the location of the database from the appsettings.json file.
+    - Default: localdb for both application and authentication table (2 databases)
+4. Run blazor application
